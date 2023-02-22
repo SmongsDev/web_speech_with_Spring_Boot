@@ -18,6 +18,7 @@ repositories {
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
 	maven { url 'https://repo.spring.io/snapshot' }
+  jcenter()
 }
 
 dependencies {
@@ -26,7 +27,11 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'	
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'net.sf.sociaal:freetts:1.2.2'
+	// implementation group: 'com.sun.speech', name: 'freetts', version: '1.2.2'
+	// implementation files('/src/main/resources/static/freetts.jar')
 }
 
 tasks.named('test') {
