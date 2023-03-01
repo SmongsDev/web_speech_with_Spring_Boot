@@ -2,6 +2,7 @@
 web_speech_with_Spring_Boot
 
 ## This is the speechToText api of ibm used by Watson api.
+ibm.cloud를 사야함;; 
 
 # IBM Developer
 https://developer.ibm.com/
