@@ -30,6 +30,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'	
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'net.sf.sociaal:freetts:1.2.2'
+	implementation 'com.ibm.watson.developer_cloud:speech-to-text:4.2.1'
+	implementation 'com.ibm.watson:speech-to-text:10.1.0'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation 'javax.servlet:jstl'
+	// compile 'com.google.cloud:google-cloud-speech:0.32.0-alpha'
 	// implementation group: 'com.sun.speech', name: 'freetts', version: '1.2.2'
 	// implementation files('/src/main/resources/static/freetts.jar')
 }

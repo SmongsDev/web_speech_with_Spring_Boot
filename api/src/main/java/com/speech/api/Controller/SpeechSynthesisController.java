@@ -8,14 +8,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 
-@RestController
+import org.springframework.stereotype.Controller;
+// @RestController
+
+@Controller
 @RequestMapping("/api")
 public class SpeechSynthesisController {
     
     private static final String VOICENAME_kevin = "kevin16";
 
     @PostMapping("/speak")
-    public void speak(@RequestParam("text") String text) throws Exception {
+    public String speak(@RequestParam("text") String text) throws Exception {
         // Voice voice = new Voice("kevin16");
         // voice.say(text);
         // voice.allocate();
@@ -27,9 +30,12 @@ public class SpeechSynthesisController {
         Voice voice;
         VoiceManager voiceManager = VoiceManager.getInstance();
         voice = voiceManager.getVoice(VOICENAME_kevin);
-        if (voice != null){
+        try{
             voice.allocate();
             voice.speak(text);
+        } catch(NullPointerException e){
+            System.out.println(e);
         }
+        return "redirect:/speak";
     }
 }

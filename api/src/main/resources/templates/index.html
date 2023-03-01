@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
@@ -8,4 +8,67 @@
   <p>HI</p>
   <script src="/js/recongnition.js"></script>
 </body>
+</html> -->
+<html>
+    <head>
+        <title>Folio3 - IBM Watson을 사용한 텍스트 음성</title>
+        <link rel="icon" href="http://www.folio3.com/wp-content/themes/folio3/favicon.ico" type="image/png">
+
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/styles/main.css">
+
+    </head>
+    <body>
+        <div class="text-center mb-4 wrapper">
+            <img class="mb-4" src="http://www.folio3.com/wp-content/themes/folio3/page_templates/images/folio-logo.png" >
+            <h1 class="h3 mb-3 font-weight-normal">왓슨 음성 텍스트</h1>
+            <p>아래 파일을 추가하고 기록을 클릭하여 기록을 생성하십시오.</p>
+            <div class="form-label-group">
+                <input type="file" id="audio" class="form-control" placeholder="Audio File" required="" autofocus="">
+            </div>
+            <div>&nbsp;</div>
+            <button class="btn btn-lg btn-primary btn-block" id="transcribe-btn">Transcribe!</button>
+            <div>&nbsp;</div>
+            <button class="btn btn-lg btn-primary btn-block" id="sample-btn">Sample!</button>
+            <code id="transcript">여기에 기록이 표시됩니다!</code>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+        <script>
+            $('#transcribe-btn').click(function (e) {
+                e.preventDefault();
+                var file = new FileReader();
+                file.onload = function (e) {
+                    var base64Audio = this.result;
+                    var data = new FormData();
+                    data.append('audio', base64Audio.split(',')[1]);
+                    $.ajax({
+                        type: "POST",
+                        url: "/speech/transcribe",
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        success: function( result ) {
+                            $('#transcript').html( result );
+                        }
+                    });
+                }
+                file.readAsDataURL($('#audio')[0].files[0]);
+                console.log(file);
+            });
+
+            $("#sample-btn").click(function (e){
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: "/speech/test",
+                    success: function( result ){
+                        $('#transcript').html(result);
+                    }
+                })
+            });
+        </script>
+    </body>
 </html>

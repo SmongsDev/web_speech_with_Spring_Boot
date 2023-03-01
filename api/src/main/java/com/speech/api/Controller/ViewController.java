@@ -9,8 +9,9 @@ import org.springframework.ui.Model;
 public class ViewController{
 
   @RequestMapping("/speak")
-  public void speak(Model model){
+  public String speak(Model model){
     model.addAttribute("text", "Hello");
+    return "speech/speak";
   }
 
 }
